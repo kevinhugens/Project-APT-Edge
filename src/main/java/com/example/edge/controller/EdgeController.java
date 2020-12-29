@@ -36,14 +36,18 @@ public class EdgeController {
                 restTemplate.exchange("http://" + aptSchepenBaseurl + "/schepen/naam/{naam}",
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<Schip>>() {
                         },"Schip 1");
+
         ResponseEntity<List<Container>> responseEntityContainer =
                 restTemplate.exchange("http://" + aptContainerBaseurl + "/containers/schip/{id}",
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<Container>>() {
                         },1);
+
         List<Edge> lijst = new ArrayList<>();
+
         for(Schip schip : responseEntity.getBody()){
             lijst.add(new Edge(schip,responseEntityContainer.getBody()));
         }
+
         return lijst;
     }
 }

@@ -5,10 +5,16 @@ import java.util.List;
 public class Edge {
     private Schip schip;
     private String schipNaam;
-    private String schipCapaciteit;
+    private int schipCapaciteit;
     private List<Container> containers;
 
     public Edge() {
+    }
+
+    public Edge(String schipNaam, int schipCapaciteit, List<Container> containers) {
+        this.schipNaam = schipNaam;
+        this.schipCapaciteit = schipCapaciteit;
+        this.containers = containers;
     }
 
     public Edge(Schip schip, List<Container> containers) {
@@ -30,5 +36,21 @@ public class Edge {
 
     public void setContainers(List<Container> containers) {
         this.containers = containers;
+    }
+
+    public String getSchipNaam() {
+        return schipNaam;
+    }
+
+    public void setSchipNaam(String schipNaam) {
+        this.schipNaam = schipNaam;
+    }
+
+    public int getSchipCapaciteit() {
+        return schipCapaciteit;
+    }
+
+    public void setSchipCapaciteit(int schipCapaciteit) {
+        this.schipCapaciteit = schipCapaciteit;
     }
 }
