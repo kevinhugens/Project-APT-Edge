@@ -19,6 +19,8 @@ public class Edge {
 
     public Edge(Schip schip, List<Container> containers) {
         this.schip = schip;
+        this.schipNaam = schip.getName();
+        this.schipCapaciteit = schip.getCapaciteit();
         this.containers = containers;
     }
 
