@@ -31,20 +31,20 @@ public class EdgeController {
     //private String aptRederijenBaseurl;
 
     @GetMapping("/")
-    public String getDetailsOfSchip1(){
+    public Edge getDetailsOfSchip1(){
 
-//        Schip schip =
-//                restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen/naam/{naam}",
-//                        Schip.class,"Schip 1");
-//
-//        ResponseEntity<List<Container>> responseEntity =
-//                restTemplate.exchange("http://" + aptContainerBaseurl + "/containers/schip/{id}",
-//                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Container>>() {
-//                        },1);
-//
-//        List<Container> lijstContainers = responseEntity.getBody();
-//        Edge returnObject = new Edge(schip,lijstContainers);
+        Schip schip =
+                restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen/naam/{naam}",
+                        Schip.class,"Schip 1");
 
-        return "Connection OK";
+        ResponseEntity<List<Container>> responseEntity =
+                restTemplate.exchange("http://" + aptContainerBaseurl + "/containers/schip/{id}",
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Container>>() {
+                        },1);
+
+        List<Container> lijstContainers = responseEntity.getBody();
+        Edge returnObject = new Edge(schip,lijstContainers);
+
+        return  returnObject;
     }
 }
