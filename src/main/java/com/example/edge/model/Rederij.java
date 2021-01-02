@@ -1,14 +1,6 @@
 package com.example.edge.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 public class Rederij {
-
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int rederijID;
 
     private String naam;
