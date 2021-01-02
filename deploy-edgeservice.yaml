@@ -26,10 +26,10 @@ spec:
               cpu: 0.2
               memory: "200Mi"
           env:                    # Environment variables supplied to the Pod
-            - name: APTCONTAINER_SERVICE_BASEURL
-              value: "project-apt-containers-server:8051"
             - name: APTSCHEPEN_SERVICE_BASEURL
               value: "project-apt-schepen-server:8052"
+            - name: APTCONTAINER_SERVICE_BASEURL
+              value: "project-apt-containers-server:8053"
 ---
 apiVersion: v1                # API version
 kind: Service                 # Type of the kubernetes resource
