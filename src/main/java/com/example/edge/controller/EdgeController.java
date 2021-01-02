@@ -27,8 +27,8 @@ public class EdgeController {
     @Value("${aptschepen.baseurl}")
     private String aptSchepenBaseurl;
 
-    @Value("${aptrederijen.baseurl}")
-    private String aptRederijenBaseurl;
+    //@Value("${aptrederijen.baseurl}")
+    //private String aptRederijenBaseurl;
 
     @GetMapping("/")
     public String getDetailsOfSchip1(){
