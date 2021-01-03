@@ -40,8 +40,24 @@ public class EdgeController {
 
     @GetMapping("/schepen/all")
     public List<Schip> getAllSchips() {
-        GenericWrapper wrapper = restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen", GenericWrapper.class);
-        return objectMapper.convertValue(wrapper.get_embedded().get("schips"), new TypeReference<List<Schip>>(){});
+        //GenericWrapper wrapper = restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen", GenericWrapper.class);
+        //return objectMapper.convertValue(wrapper.get_embedded().get("schips"), new TypeReference<List<Schip>>(){});
+        ResponseEntity<List<Schip>> responseEntity =
+                restTemplate.exchange("http://" + aptSchepenBaseurl + "/schepen",
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Schip>>() {
+                        });
+
+        List<Schip> lijst = responseEntity.getBody();
+        return lijst;
+    }
+    @GetMapping("/schepen/{testnaam}")
+    public Schip getAllSchips(@PathVariable String testnaam) {
+        //GenericWrapper wrapper = restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen", GenericWrapper.class);
+        //return objectMapper.convertValue(wrapper.get_embedded().get("schips"), new TypeReference<List<Schip>>(){});
+        Schip schip =
+                restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen/naam/{naam}",
+                        Schip.class,testnaam);
+        return schip;
     }
 
     @GetMapping("/rederijen/all")
@@ -68,8 +84,11 @@ public class EdgeController {
         return  returnObject;
     }
     @GetMapping("/test")
-    public String test(){
-        return "Connection OK";
+    public Schip test(){
+        Schip schip =
+                restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen/naam/{naam}",
+                        Schip.class,"Schip 1");
+        return schip;
     }
 
     @GetMapping("/rederijen/{id}")
