@@ -26,6 +26,8 @@ spec:
               cpu: 0.2
               memory: "200Mi"
           env:                    # Environment variables supplied to the Pod
+            - name: APTREDERIJEN_SERVICE_BASEURL
+              value: "project-apt-rederijen-server:8051"
             - name: APTSCHEPEN_SERVICE_BASEURL
               value: "project-apt-schepen-server:8052"
             - name: APTCONTAINER_SERVICE_BASEURL
