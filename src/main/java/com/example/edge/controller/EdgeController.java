@@ -14,6 +14,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
 @RestController
 public class EdgeController {
 
@@ -50,13 +52,31 @@ public class EdgeController {
         List<Schip> lijst = responseEntity.getBody();
         return lijst;
     }
-    @GetMapping("/schepen/{testnaam}")
-    public Schip getAllSchips(@PathVariable String testnaam) {
+    @GetMapping("/schepen/{id}")
+    public Schip getAllSchips(@PathVariable int id) {
         //GenericWrapper wrapper = restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen", GenericWrapper.class);
         //return objectMapper.convertValue(wrapper.get_embedded().get("schips"), new TypeReference<List<Schip>>(){});
         Schip schip =
-                restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen/naam/{naam}",
-                        Schip.class,testnaam);
+                restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen/{id}",
+                        Schip.class,id);
+        return schip;
+    }
+    @GetMapping("/schepen/metid/{id}")
+    public Schip getAllSchips(@PathVariable String id) {
+        //GenericWrapper wrapper = restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen", GenericWrapper.class);
+        //return objectMapper.convertValue(wrapper.get_embedded().get("schips"), new TypeReference<List<Schip>>(){});
+        Schip schip =
+                restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen/{id}",
+                        Schip.class,id);
+        return schip;
+    }
+    @GetMapping("/schepen/metidenparse/{id}")
+    public Schip getAllSchipsMetParse(@PathVariable String id) {
+        //GenericWrapper wrapper = restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen", GenericWrapper.class);
+        //return objectMapper.convertValue(wrapper.get_embedded().get("schips"), new TypeReference<List<Schip>>(){});
+        Schip schip =
+                restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen/{id}",
+                        Schip.class,parseInt(id));
         return schip;
     }
 
