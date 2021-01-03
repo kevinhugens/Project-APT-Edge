@@ -67,6 +67,15 @@ public class EdgeController {
 
         return  returnObject;
     }
+    @GetMapping("/test")
+    public List<Rederij> test(@PathVariable String naam){
+        ResponseEntity<List<Rederij>> responseEntity =
+                restTemplate.exchange("http://" + aptRederijenBaseurl + "/rederijen",
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Rederij>>() {
+                        });
+
+        return responseEntity.getBody();
+    }
 
     @GetMapping("/rederijen/{id}")
     public Edge getDetailsOfRederij(@PathVariable int id) {
