@@ -73,19 +73,19 @@ public class EdgeController {
     }
 
     @GetMapping("/rederijen/{id}")
-    public Edge getDetailsOfRederij(@PathVariable int id) {
+    public Rederij getDetailsOfRederij(@PathVariable int id) {
         Rederij rederij = restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederij/{id}",
                 Rederij.class, id);
 
-        ResponseEntity<List<Schip>> responseEntity =
-                restTemplate.exchange("http://" + aptSchepenBaseurl + "/schepen/{rederijID}",
-                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Schip>>() {
-                        }, rederij.getRederijID());
+//        ResponseEntity<List<Schip>> responseEntity =
+//                restTemplate.exchange("http://" + aptSchepenBaseurl + "/schepen/{rederijID}",
+//                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Schip>>() {
+//                        }, rederij.getRederijID());
+//
+//        List<Schip> listSchips = responseEntity.getBody();
+//        Edge returnObject = new Edge(rederij, listSchips);
 
-        List<Schip> listSchips = responseEntity.getBody();
-        Edge returnObject = new Edge(rederij, listSchips);
-
-        return returnObject;
+        return rederij;
     }
 
     @GetMapping("/containers/{id}")
