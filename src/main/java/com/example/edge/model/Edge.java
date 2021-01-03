@@ -6,6 +6,9 @@ public class Edge {
     private Schip schip;
     private String schipNaam;
     private int schipCapaciteit;
+    private Rederij rederij;
+    private Container container;
+    private List<Schip> schips;
     private List<Container> containers;
 
     public Edge() {
@@ -22,6 +25,16 @@ public class Edge {
         this.schipNaam = schip.getName();
         this.schipCapaciteit = schip.getCapaciteit();
         this.containers = containers;
+    }
+
+    public Edge(Rederij rederij, List<Schip> schips) {
+        this.rederij = rederij;
+        this.schips = schips;
+    }
+
+    public Edge(Container container, Schip schip) {
+        this.container = container;
+        this.schip = schip;
     }
 
     public Schip getSchip() {
@@ -54,5 +67,29 @@ public class Edge {
 
     public void setSchipCapaciteit(int schipCapaciteit) {
         this.schipCapaciteit = schipCapaciteit;
+    }
+
+    public Rederij getRederij() {
+        return rederij;
+    }
+
+    public void setRederij(Rederij rederij) {
+        this.rederij = rederij;
+    }
+
+    public List<Schip> getSchips() {
+        return schips;
+    }
+
+    public void setSchips(List<Schip> schips) {
+        this.schips = schips;
+    }
+
+    public Container getContainer() {
+        return container;
+    }
+
+    public void setContainer(Container container) {
+        this.container = container;
     }
 }
