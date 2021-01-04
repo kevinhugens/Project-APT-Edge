@@ -88,9 +88,9 @@ public class EdgeController {
                 Rederij.class, naam);
 
         ResponseEntity<List<Schip>> responseEntity =
-                restTemplate.exchange("http://" + aptSchepenBaseurl + "/schepen/rederij/{rederijID}",
+                restTemplate.exchange("http://" + aptSchepenBaseurl + "/schepen/rederij/{id}",
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<Schip>>() {
-                        }, rederij.getRederijID());
+                        }, rederij.getId());
 
         List<Schip> listSchips = responseEntity.getBody();
         Edge returnObject = new Edge(rederij, listSchips);
@@ -120,7 +120,7 @@ public class EdgeController {
 
     @PostMapping("/rederijen/insert")
     public Rederij addRederij(@RequestBody Rederij newRederij) {
-        return restTemplate.postForObject("http://" + aptRederijenBaseurl + "/rederij", new Rederij(newRederij.getRederijID(), newRederij.getNaam(), newRederij.getMail(), newRederij.getTelefoon(), newRederij.getPostcode(), newRederij.getGemeente()), Rederij.class);
+        return restTemplate.postForObject("http://" + aptRederijenBaseurl + "/rederij", new Rederij(newRederij.getNaam(), newRederij.getMail(), newRederij.getTelefoon(), newRederij.getPostcode(), newRederij.getGemeente()), Rederij.class);
     }
 
     @PutMapping("/schepen/update")
@@ -184,9 +184,9 @@ public class EdgeController {
                 HttpMethod.PUT, new HttpEntity<>(rederij), Rederij.class);
 
         ResponseEntity<List<Schip>> responseEntity =
-                restTemplate.exchange("http://" + aptSchepenBaseurl + "/schepen/{rederijID}",
+                restTemplate.exchange("http://" + aptSchepenBaseurl + "/schepen/rederij/{id}",
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<Schip>>() {
-                        }, rederij.getRederijID());
+                        }, rederij.getId());
 
         List<Schip> listSchips = responseEntity.getBody();
         Edge returnObject = new Edge(rederij, listSchips);

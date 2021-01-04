@@ -1,7 +1,7 @@
 package com.example.edge.model;
 
 public class Rederij {
-    private int rederijID;
+    private String id;
 
     private String naam;
     private String mail;
@@ -9,8 +9,7 @@ public class Rederij {
     private String postcode;
     private String gemeente;
 
-    public Rederij(int rederijID, String naam, String mail, String telefoon, String postcode, String gemeente) {
-        this.rederijID = rederijID;
+    public Rederij(String naam, String mail, String telefoon, String postcode, String gemeente) {
         this.naam = naam;
         this.mail = mail;
         this.telefoon = telefoon;
@@ -21,12 +20,12 @@ public class Rederij {
     public Rederij() {
     }
 
-    public int getRederijID() {
-        return rederijID;
+    public String getId() {
+        return id;
     }
 
-    public void setRederijID(int rederijID) {
-        this.rederijID = rederijID;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNaam() {
