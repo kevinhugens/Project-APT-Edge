@@ -82,7 +82,7 @@ public class EdgeController {
         return  returnObject;
     }
 
-    @GetMapping("/rederijen/{id}")
+    @GetMapping("/rederijen/{naam}")
     public Edge getDetailsOfRederij(@PathVariable String naam) {
         Rederij rederij = restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederij/{naam}",
                 Rederij.class, naam);
@@ -98,7 +98,7 @@ public class EdgeController {
         return returnObject;
     }
 
-    @GetMapping("/containers/{id}")
+    @GetMapping("/containers/{serieCode}")
     public Edge getDetailsOfContainer(@PathVariable String serieCode) {
         Container container = restTemplate.getForObject("http://" + aptContainerBaseurl + "/containers/serieCode/{serieCode}",
                 Container.class, serieCode);
