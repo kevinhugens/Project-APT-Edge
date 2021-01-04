@@ -88,7 +88,7 @@ public class EdgeController {
                 Rederij.class, naam);
 
         ResponseEntity<List<Schip>> responseEntity =
-                restTemplate.exchange("http://" + aptSchepenBaseurl + "/schepen/{rederijID}",
+                restTemplate.exchange("http://" + aptSchepenBaseurl + "/schepen/rederij/{rederijID}",
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<Schip>>() {
                         }, rederij.getRederijID());
 
