@@ -84,7 +84,7 @@ public class EdgeController {
 
     @GetMapping("/rederijen/{naam}")
     public Edge getDetailsOfRederij(@PathVariable String naam) {
-        Rederij rederij = restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederij/{naam}",
+        Rederij rederij = restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederij/naam/{naam}",
                 Rederij.class, naam);
 
         ResponseEntity<List<Schip>> responseEntity =
