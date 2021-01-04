@@ -207,7 +207,7 @@ public class EdgeController {
     }
 
     @DeleteMapping("/rederijen/delete/{id}")
-    public ResponseEntity deleteRederij(@PathVariable int id) {
+    public ResponseEntity deleteRederij(@PathVariable String id) {
         restTemplate.delete("http://" + aptRederijenBaseurl + "/rederij/delete/" + id);
         return ResponseEntity.ok().build();
     }

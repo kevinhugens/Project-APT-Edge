@@ -7,12 +7,12 @@ public class Schip {
     private int capaciteit;
     private String startLocatie;
     private String eindLocatie;
-    private int rederijId;
+    private String rederijId;
 
     public Schip() {
     }
 
-    public Schip(String naam, int capaciteit, String startLocatie, String eindLocatie, int rederijId) {
+    public Schip(String naam, int capaciteit, String startLocatie, String eindLocatie, String rederijId) {
         this.naam = naam;
         this.capaciteit = capaciteit;
         this.startLocatie = startLocatie;
@@ -60,11 +60,11 @@ public class Schip {
         this.capaciteit = capaciteit;
     }
 
-    public int getRederijId() {
+    public String getRederijId() {
         return rederijId;
     }
 
-    public void setRederijId(int rederijId) {
+    public void setRederijId(String rederijId) {
         this.rederijId = rederijId;
     }
 }

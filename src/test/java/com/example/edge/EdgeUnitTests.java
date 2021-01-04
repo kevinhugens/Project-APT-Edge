@@ -55,8 +55,8 @@ public class EdgeUnitTests {
     private Container container2 = new Container(2, "564" ,800,"Toestellen" , "Dessel", "Schoten");
     private Container container3 =  new Container(1,"a78a78" ,1500 ,"Voedsel", "Amsterdam", "Antwerpen");
 
-    private Schip schip1 =  new Schip("USS Enterprise", 10, "Amsterdam", "Antwerpen", 1);
-    private Schip schip2 = new Schip("Yamato", 15, "Dessel", "Schoten", 1);
+    private Schip schip1 =  new Schip("USS Enterprise", 10, "Amsterdam", "Antwerpen", "1");
+    private Schip schip2 = new Schip("Yamato", 15, "Dessel", "Schoten", "1");
 
     private Rederij rederij1 = new Rederij("Thomas More", "thomas@gmail.com", "0474455555", "2440", "Geel");
     private Rederij rederij2 = new Rederij("Stad Turnhout", "turnhout@gmail.com", "0414456585", "2300", "Turnhout");
