@@ -152,7 +152,7 @@ public class EdgeController {
     @PutMapping("/containers/update")
     public Edge updateContainer(@RequestBody Container updateContainer) {
         Container container = restTemplate.getForObject("http://" + aptContainerBaseurl + "/containers/serieCode/{serieCode}",
-                Container.class, updateContainer.getId());
+                Container.class, updateContainer.getSerieCode());
 
         assert container != null;
         container.setEindLocatie(updateContainer.getEindLocatie());
@@ -170,7 +170,7 @@ public class EdgeController {
 
     @PutMapping("/rederijen/update")
     public Edge updateRederij(@RequestBody Rederij updateRederij) {
-        Rederij rederij = restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederij/{naam}",
+        Rederij rederij = restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederij/naam/{naam}",
                 Rederij.class, updateRederij.getNaam());
 
         assert rederij != null;

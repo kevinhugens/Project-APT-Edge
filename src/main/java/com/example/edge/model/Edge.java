@@ -4,10 +4,7 @@ import java.util.List;
 
 public class Edge {
     private Schip schip;
-    private String schipNaam;
-    private int schipCapaciteit;
     private Rederij rederij;
-    private Container container;
     private List<Schip> schips;
     private List<Container> containers;
 
