@@ -110,7 +110,7 @@ public class EdgeController {
 
     @PostMapping("/schepen/insert")
     public Schip addSchip(@RequestBody Schip newSchip) {
-        return restTemplate.postForObject("http://" + aptSchepenBaseurl + "/schepen", new Schip(newSchip.getName(), newSchip.getCapaciteit(), newSchip.getStartLocatie(), newSchip.getEindLocatie(), newSchip.getRederijId()), Schip.class);
+        return restTemplate.postForObject("http://" + aptSchepenBaseurl + "/schepen", new Schip(newSchip.getNaam(), newSchip.getCapaciteit(), newSchip.getStartLocatie(), newSchip.getEindLocatie(), newSchip.getRederijId()), Schip.class);
     }
 
     @PostMapping("/containers/insert")
@@ -126,10 +126,10 @@ public class EdgeController {
     @PutMapping("/schepen/update")
     public Edge updateSchip(@RequestBody Schip updateSchip) {
         Schip schip = restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen/naam/{naam}",
-                Schip.class, updateSchip.getName());
+                Schip.class, updateSchip.getNaam());
 
         assert schip != null;
-        schip.setName(updateSchip.getName());
+        schip.setNaam(updateSchip.getNaam());
         schip.setCapaciteit(updateSchip.getCapaciteit());
         schip.setEindLocatie(updateSchip.getEindLocatie());
         schip.setRederijId(updateSchip.getRederijId());
