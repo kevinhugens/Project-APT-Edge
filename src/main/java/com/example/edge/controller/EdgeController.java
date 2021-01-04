@@ -1,7 +1,9 @@
 package com.example.edge.controller;
 
-import com.example.edge.model.*;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.example.edge.model.Container;
+import com.example.edge.model.Edge;
+import com.example.edge.model.Rederij;
+import com.example.edge.model.Schip;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,25 +36,37 @@ public class EdgeController {
 
     @GetMapping("/containers/all")
     public List<Container> getAllContainers() {
-        GenericWrapper wrapper = restTemplate.getForObject("http://" + aptContainerBaseurl + "/containers", GenericWrapper.class);
-        return objectMapper.convertValue(wrapper.get_embedded().get("containers"), new TypeReference<List<Container>>(){});
+        ResponseEntity<List<Container>> responseEntity =
+                restTemplate.exchange("http://" + aptContainerBaseurl + "/containers",
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Container>>() {
+                        });
+        List<Container> lijstContainers = responseEntity.getBody();
+        return lijstContainers;
     }
 
     @GetMapping("/schepen/all")
     public List<Schip> getAllSchips() {
-        GenericWrapper wrapper = restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen", GenericWrapper.class);
-        return objectMapper.convertValue(wrapper.get_embedded().get("schips"), new TypeReference<List<Schip>>(){});
+        ResponseEntity<List<Schip>> responseEntity =
+                restTemplate.exchange("http://" + aptSchepenBaseurl + "/schepen",
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Schip>>() {
+                        });
+        List<Schip> listSchips = responseEntity.getBody();
+        return listSchips;
     }
 
     @GetMapping("/rederijen/all")
     public List<Rederij> getAllRederijen() {
-        GenericWrapper wrapper = restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederijen", GenericWrapper.class);
-        return objectMapper.convertValue(wrapper.get_embedded().get("rederijs"), new TypeReference<List<Rederij>>(){});
+        ResponseEntity<List<Rederij>> responseEntity =
+                restTemplate.exchange("http://" + aptRederijenBaseurl + "/rederijen",
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Rederij>>() {
+                        });
+
+        List<Rederij> rederijs = responseEntity.getBody();
+        return rederijs;
     }
 
     @GetMapping("/schepen/{naam}")
-    public Edge getDetailsOfSchip1(@PathVariable String naam){
-
+    public Edge getDetailsOfSchip(@PathVariable String naam){
         Schip schip =
                 restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen/naam/{naam}",
                         Schip.class,naam);
@@ -69,9 +83,9 @@ public class EdgeController {
     }
 
     @GetMapping("/rederijen/{id}")
-    public Edge getDetailsOfRederij(@PathVariable int id) {
-        Rederij rederij = restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederij/{id}",
-                Rederij.class, id);
+    public Edge getDetailsOfRederij(@PathVariable String naam) {
+        Rederij rederij = restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederij/{naam}",
+                Rederij.class, naam);
 
         ResponseEntity<List<Schip>> responseEntity =
                 restTemplate.exchange("http://" + aptSchepenBaseurl + "/schepen/{rederijID}",
@@ -85,9 +99,9 @@ public class EdgeController {
     }
 
     @GetMapping("/containers/{id}")
-    public Edge getDetailsOfContainer(@PathVariable int id) {
-        Container container = restTemplate.getForObject("http://" + aptContainerBaseurl + "/containers/{id}",
-                Container.class, id);
+    public Edge getDetailsOfContainer(@PathVariable String serieCode) {
+        Container container = restTemplate.getForObject("http://" + aptContainerBaseurl + "/containers/serieCode/{serieCode}",
+                Container.class, serieCode);
 
         Schip schip = restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen/" + container.getSchipId(), Schip.class);
 
@@ -101,7 +115,7 @@ public class EdgeController {
 
     @PostMapping("/containers/insert")
     public Container addContainer(@RequestBody Container newContainer) {
-        return restTemplate.postForObject("http://" + aptContainerBaseurl + "/containers/insert", new Container(newContainer.getSchipId(), newContainer.getGewicht(), newContainer.getInhoud(), newContainer.getStartLocatie(), newContainer.getEindLocatie()), Container.class);
+        return restTemplate.postForObject("http://" + aptContainerBaseurl + "/containers/insert", new Container(newContainer.getSchipId(), newContainer.getSerieCode() ,newContainer.getGewicht(), newContainer.getInhoud(), newContainer.getStartLocatie(), newContainer.getEindLocatie()), Container.class);
     }
 
     @PostMapping("/rederijen/insert")
@@ -111,8 +125,8 @@ public class EdgeController {
 
     @PutMapping("/schepen/update")
     public Edge updateSchip(@RequestBody Schip updateSchip) {
-        Schip schip = restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen/{id}",
-                Schip.class, updateSchip.getId());
+        Schip schip = restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen/naam/{naam}",
+                Schip.class, updateSchip.getName());
 
         assert schip != null;
         schip.setName(updateSchip.getName());
@@ -137,7 +151,7 @@ public class EdgeController {
 
     @PutMapping("/containers/update")
     public Edge updateContainer(@RequestBody Container updateContainer) {
-        Container container = restTemplate.getForObject("http://" + aptContainerBaseurl + "/containers/{id}",
+        Container container = restTemplate.getForObject("http://" + aptContainerBaseurl + "/containers/serieCode/{serieCode}",
                 Container.class, updateContainer.getId());
 
         assert container != null;
@@ -156,8 +170,8 @@ public class EdgeController {
 
     @PutMapping("/rederijen/update")
     public Edge updateRederij(@RequestBody Rederij updateRederij) {
-        Rederij rederij = restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederij/{id}",
-                Rederij.class, updateRederij.getRederijID());
+        Rederij rederij = restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederij/{naam}",
+                Rederij.class, updateRederij.getNaam());
 
         assert rederij != null;
         rederij.setGemeente(updateRederij.getGemeente());

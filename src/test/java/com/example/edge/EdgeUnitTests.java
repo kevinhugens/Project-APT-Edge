@@ -51,9 +51,9 @@ public class EdgeUnitTests {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-    private Container container1 = new Container( 1, 1000, "Schoenen", "Amsterdam", "Antwerpen");
-    private Container container2 = new Container(2, 800,"Toestellen" , "Dessel", "Schoten");
-    private Container container3 =  new Container(1, 1500, "Voedsel", "Amsterdam", "Antwerpen");
+    private Container container1 = new Container( 1, "54945",1000, "Schoenen", "Amsterdam", "Antwerpen");
+    private Container container2 = new Container(2, "564" ,800,"Toestellen" , "Dessel", "Schoten");
+    private Container container3 =  new Container(1,"a78a78" ,1500 ,"Voedsel", "Amsterdam", "Antwerpen");
 
     private Schip schip1 =  new Schip("USS Enterprise", 10, "Amsterdam", "Antwerpen", 1);
     private Schip schip2 = new Schip("Yamato", 15, "Dessel", "Schoten", 1);

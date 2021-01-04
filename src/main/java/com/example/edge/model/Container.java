@@ -6,6 +6,8 @@ public class Container {
 
     private int schipId;
 
+    private String serieCode;
+
     private double gewicht;
 
     private String inhoud;
@@ -66,8 +68,17 @@ public class Container {
 
     }
 
-    public Container(int schipId, double gewicht, String inhoud, String startLocatie, String eindLocatie) {
+    public String getSerieCode() {
+        return serieCode;
+    }
+
+    public void setSerieCode(String serieCode) {
+        this.serieCode = serieCode;
+    }
+
+    public Container(int schipId, String serieCode , double gewicht, String inhoud, String startLocatie, String eindLocatie) {
         this.schipId = schipId;
+        this.serieCode = serieCode;
         this.gewicht = gewicht;
         this.inhoud = inhoud;
         this.startLocatie = startLocatie;
