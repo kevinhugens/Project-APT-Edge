@@ -12,8 +12,9 @@ public class Edge {
     public Edge() {
     }
 
-    public Edge(Schip schip, List<Container> containers) {
+    public Edge(Schip schip, Rederij rederij ,List<Container> containers) {
         this.schip = schip;
+        this.rederij = rederij;
         this.containers = containers;
     }
 
@@ -26,6 +27,7 @@ public class Edge {
         this.container = container;
         this.schip = schip;
     }
+
 
     public Schip getSchip() {
         return schip;

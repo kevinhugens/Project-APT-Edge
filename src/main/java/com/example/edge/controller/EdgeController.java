@@ -76,8 +76,12 @@ public class EdgeController {
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<Container>>() {
                         },schip.getId());
 
+        Rederij rederij =
+                restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederij/{id}",
+                        Rederij.class, schip.getRederijId());
+
         List<Container> lijstContainers = responseEntity.getBody();
-        Edge returnObject = new Edge(schip,lijstContainers);
+        Edge returnObject = new Edge(schip, rederij,lijstContainers);
 
         return  returnObject;
     }
@@ -143,8 +147,12 @@ public class EdgeController {
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<Container>>() {
                         },schip.getId());
 
+        Rederij rederij =
+                restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederij/{id}",
+                        Rederij.class, schip.getRederijId());
+
         List<Container> lijstContainers = responseEntity.getBody();
-        Edge returnObject = new Edge(schip,lijstContainers);
+        Edge returnObject = new Edge(schip, rederij, lijstContainers);
 
         return  returnObject;
     }
