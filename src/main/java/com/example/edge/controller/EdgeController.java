@@ -205,7 +205,7 @@ public class EdgeController {
 
     @DeleteMapping("/schepen/delete/{id}")
     public ResponseEntity deleteSchip(@PathVariable int id) {
-        restTemplate.delete("http://" + aptSchepenBaseurl + "/schepen/" + id);
+        restTemplate.delete("http://" + aptSchepenBaseurl + "/schepen/delete/" + id);
         return ResponseEntity.ok().build();
     }
 
