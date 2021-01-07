@@ -130,8 +130,8 @@ public class EdgeController {
 
     @PutMapping("/schepen/update")
     public Edge updateSchip(@RequestBody Schip updateSchip) {
-        Schip schip = restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen/naam/{naam}",
-                Schip.class, updateSchip.getNaam());
+        Schip schip = restTemplate.getForObject("http://" + aptSchepenBaseurl + "/schepen/{id}",
+                Schip.class, updateSchip.getId());
 
         assert schip != null;
         schip.setNaam(updateSchip.getNaam());
@@ -160,8 +160,8 @@ public class EdgeController {
 
     @PutMapping("/containers/update")
     public Edge updateContainer(@RequestBody Container updateContainer) {
-        Container container = restTemplate.getForObject("http://" + aptContainerBaseurl + "/containers/serieCode/{serieCode}",
-                Container.class, updateContainer.getSerieCode());
+        Container container = restTemplate.getForObject("http://" + aptContainerBaseurl + "/containers/{id}",
+                Container.class, updateContainer.getId());
 
         assert container != null;
         container.setEindLocatie(updateContainer.getEindLocatie());
@@ -179,8 +179,8 @@ public class EdgeController {
 
     @PutMapping("/rederijen/update")
     public Edge updateRederij(@RequestBody Rederij updateRederij) {
-        Rederij rederij = restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederijen/naam/{naam}",
-                Rederij.class, updateRederij.getNaam());
+        Rederij rederij = restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederijen/{id}",
+                Rederij.class, updateRederij.getId());
 
         assert rederij != null;
         rederij.setGemeente(updateRederij.getGemeente());
