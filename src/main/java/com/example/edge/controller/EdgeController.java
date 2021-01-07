@@ -168,6 +168,7 @@ public class EdgeController {
         container.setGewicht(updateContainer.getGewicht());
         container.setInhoud(updateContainer.getInhoud());
         container.setSchipId(updateContainer.getSchipId());
+        container.setSerieCode(updateContainer.getSerieCode());
         container.setStartLocatie(updateContainer.getStartLocatie());
 
         ResponseEntity<Container> responseEntityContainer = restTemplate.exchange("http://" + aptContainerBaseurl + "/containers/update",
