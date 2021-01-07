@@ -78,7 +78,7 @@ public class EdgeController {
                         },schip.getId());
 
         Rederij rederij =
-                restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederij/{id}",
+                restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederijen/{id}",
                         Rederij.class, schip.getRederijId());
 
         List<Container> lijstContainers = responseEntity.getBody();
@@ -89,7 +89,7 @@ public class EdgeController {
 
     @GetMapping("/rederijen/{naam}")
     public Edge getDetailsOfRederij(@PathVariable String naam) {
-        Rederij rederij = restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederij/naam/{naam}",
+        Rederij rederij = restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederijen/naam/{naam}",
                 Rederij.class, naam);
 
         ResponseEntity<List<Schip>> responseEntity =
@@ -115,7 +115,7 @@ public class EdgeController {
 
     @PostMapping("/schepen/insert")
     public Schip addSchip(@RequestBody Schip newSchip) {
-        return restTemplate.postForObject("http://" + aptSchepenBaseurl + "/schepen", new Schip(newSchip.getNaam(), newSchip.getCapaciteit(), newSchip.getStartLocatie(), newSchip.getEindLocatie(), newSchip.getRederijId()), Schip.class);
+        return restTemplate.postForObject("http://" + aptSchepenBaseurl + "/schepen/insert", new Schip(newSchip.getNaam(), newSchip.getCapaciteit(), newSchip.getStartLocatie(), newSchip.getEindLocatie(), newSchip.getRederijId()), Schip.class);
     }
 
     @PostMapping("/containers/insert")
@@ -125,7 +125,7 @@ public class EdgeController {
 
     @PostMapping("/rederijen/insert")
     public Rederij addRederij(@RequestBody Rederij newRederij) {
-        return restTemplate.postForObject("http://" + aptRederijenBaseurl + "/rederij", new Rederij(newRederij.getNaam(), newRederij.getMail(), newRederij.getTelefoon(), newRederij.getPostcode(), newRederij.getGemeente()), Rederij.class);
+        return restTemplate.postForObject("http://" + aptRederijenBaseurl + "/rederijen/insert", new Rederij(newRederij.getNaam(), newRederij.getMail(), newRederij.getTelefoon(), newRederij.getPostcode(), newRederij.getGemeente()), Rederij.class);
     }
 
     @PutMapping("/schepen/update")
@@ -140,7 +140,7 @@ public class EdgeController {
         schip.setRederijId(updateSchip.getRederijId());
         schip.setStartLocatie(updateSchip.getStartLocatie());
 
-        ResponseEntity<Schip> responseEntitySchip = restTemplate.exchange("http://" + aptSchepenBaseurl + "/schepen",
+        ResponseEntity<Schip> responseEntitySchip = restTemplate.exchange("http://" + aptSchepenBaseurl + "/schepen/update",
                 HttpMethod.PUT, new HttpEntity<>(schip), Schip.class);
 
         ResponseEntity<List<Container>> responseEntity =
@@ -149,7 +149,7 @@ public class EdgeController {
                         },schip.getId());
 
         Rederij rederij =
-                restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederij/{id}",
+                restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederijen/{id}",
                         Rederij.class, schip.getRederijId());
 
         List<Container> lijstContainers = responseEntity.getBody();
@@ -179,7 +179,7 @@ public class EdgeController {
 
     @PutMapping("/rederijen/update")
     public Edge updateRederij(@RequestBody Rederij updateRederij) {
-        Rederij rederij = restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederij/naam/{naam}",
+        Rederij rederij = restTemplate.getForObject("http://" + aptRederijenBaseurl + "/rederijen/naam/{naam}",
                 Rederij.class, updateRederij.getNaam());
 
         assert rederij != null;
@@ -189,7 +189,7 @@ public class EdgeController {
         rederij.setPostcode(updateRederij.getPostcode());
         rederij.setTelefoon(updateRederij.getTelefoon());
 
-        ResponseEntity<Rederij> responseEntityContainer = restTemplate.exchange("http://" + aptRederijenBaseurl + "/rederij/update",
+        ResponseEntity<Rederij> responseEntityContainer = restTemplate.exchange("http://" + aptRederijenBaseurl + "/rederijen/update",
                 HttpMethod.PUT, new HttpEntity<>(rederij), Rederij.class);
 
         ResponseEntity<List<Schip>> responseEntity =
@@ -217,7 +217,7 @@ public class EdgeController {
 
     @DeleteMapping("/rederijen/delete/{id}")
     public ResponseEntity deleteRederij(@PathVariable String id) {
-        restTemplate.delete("http://" + aptRederijenBaseurl + "/rederij/delete/" + id);
+        restTemplate.delete("http://" + aptRederijenBaseurl + "/rederijen/delete/" + id);
         return ResponseEntity.ok().build();
     }
 
